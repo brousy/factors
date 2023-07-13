@@ -8,6 +8,7 @@ body {
 
   
   header {
+
     background-color: #333;
     color: #fff;
     padding: 20px;
@@ -37,12 +38,26 @@ body {
     text-decoration: none;
     padding: 5px 10px;
   }
+
+  #info {
+    min-height: 800px;
+  }
   
   #search {
     padding: 20px;
   }
+
+  .chuck {
+
+    display: flex;
+
+    align-items: center;
+  }
   
 .page-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   height: 200px;
 }
 
