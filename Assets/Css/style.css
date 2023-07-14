@@ -1,59 +1,63 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #333;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+}
 
 
-  
-  header {
 
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-  }
-  
-  /* nav {
+header {
+
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+/* nav {
     display: flex;
     justify-content: center;
   } */
-  ul {
-    text-align: center;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  nav ul li {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 5px 10px;
-  }
+ul {
+  text-align: center;
+}
 
-  #info {
-    min-height: 800px;
-  }
-  
-  #search {
-    padding: 20px;
-  }
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .chuck {
+nav ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
 
-    display: flex;
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+}
 
-    align-items: center;
-  }
-  
+#info {
+  min-height: 800px;
+}
+
+#search {
+  padding: 20px;
+}
+
+.chuck {
+
+  display: flex;
+
+  align-items: center;
+}
+/* .info-cards{
+  display: flex;
+  justify-content: center;
+} */
+
 .page-footer {
   position: absolute;
   left: 0;
@@ -61,24 +65,25 @@ body {
   height: 200px;
 }
 
-  h1 {
-   text-align: center;
-  }
+h1 {
+  text-align: center;
+}
 
-  h2 {
-    font-size: 20px;
-    font-weight: 400;
-  }
+h2 {
+  font-size: 20px;
+  font-weight: 400;
+}
 
-  h3 {
-    font-size: 30px;
-   
-    text-align: center;
-  }
+h3 {
+  font-size: 30px;
 
-  span {
-    font-size: 12px;
-  }
+  text-align: center;
+}
+
+span {
+  font-size: 12px;
+}
+
 /* 
   .form {
     width: 25%;
@@ -91,6 +96,3 @@ body {
     float: right;
 
   } */
-
-  
-  
