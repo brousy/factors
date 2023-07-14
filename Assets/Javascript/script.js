@@ -1,6 +1,23 @@
 var movieKey = "058146d0b6c44dd4946f65767dd0e064";
 var inputEl = $("#actInput");
 var buttonEl = $(".search-btn");
+var projectsEl = $(".scrollable-content");
+var actorNameEl = $(".card-title");
+var actorImageEl = $(".card-content img");
+var heightEl = $(".card-content .col.s12:nth-child(2) h4");
+var birthdayEl = $(".card-content .col.s12:nth-child(3) h4");
+
+buttonEl.on("click", function (event) {
+  event.preventDefault();
+  handleSubmit();
+});
+
+function handleSubmit() {
+  var actorName = inputEl.val();
+  console.log(actorName);
+  var newName = encodeURIComponent(actorName);
+  fetchRequests(newName);
+}
 
 function fetchRequests(newName) {
   var tmdbURL =
@@ -17,7 +34,6 @@ function fetchRequests(newName) {
       return response.json();
     })
     .then(function (movieData) {
-      // console.log(movieData);
       showMovieInfo(movieData);
     });
 
@@ -39,127 +55,69 @@ function fetchRequests(newName) {
 }
 
 function showMovieInfo(movieData) {
-  var movies = [];
-  movies = movieData.results[0].known_for;
-  for (i = 0; i < movies.length; i++) {
-    var movie = movies[i].original_title;
-    console.log(movie);
+  var movies = movieData.results[0].known_for;
+  projectsEl.empty();
 
-    var releaseDate = movies[i].release_date;
-    console.log(releaseDate);
-
-    var overview = movies[i].overview;
-    console.log(overview);
-  }
-}
-
-function nameFormatter(actorData) {
-  fixNameArray = actorData[0].name.toLowerCase(); //forces all letter to be lowercase
-  nameArray = fixNameArray.split(" "); //makes an array of the actors first, last, and/or middle name
-  var actorName = ""; //initialize string builder
-  var wordArray; //intializie array for each letter
-
-  for (i = 0; i < nameArray.length; i++) {
-    wordArray = nameArray[i].split(""); //splits name up into individual letters
-    wordArray[0] = wordArray[0].toUpperCase(); //makes the first letter uppercase
-    actorName = actorName + wordArray.join("") + " "; //puts the full name back together
-  }
-
-  return actorName;
-}
-
-function metersToFeet(actorData) {
-  var rawHeight = actorData[0].height * 3.28084;
-  var truncHeight = rawHeight - Math.trunc(rawHeight);
-  var actorHeight =
-    Math.floor(rawHeight) + "ft " + Math.ceil(truncHeight * 12) + "in";
-
-  return actorHeight;
-}
-
-function showMovieInfo(movieData) {
-  var posterPath;
-  var profilePath = movieData.results[0].profile_path;
-
-  console.log("https://image.tmdb.org/t/p/original" + profilePath);
-  //display images in html
-  //<img src = 'https://image.tmdb.org/t/p/original' + posterPath>
-  //<img src = 'https://image.tmdb.org/t/p/original' + profilePath>
-
-  //file path url for posters https://image.tmdb.org/t/p/original{path here}
-  var knownFor = [];
-  knownFor = movieData.results[0].known_for;
-  for (i = 0; i < knownFor.length; i++) {
-    if (knownFor[i].media_type === "movie") {
-      var movie = knownFor[i].title;
-      console.log(movie);
-      var releaseDate = knownFor[i].release_date;
-      console.log(releaseDate);
-
-      var overview = knownFor[i].overview;
-      console.log(overview);
-
-      posterPath = knownFor[i].poster_path;
-    } else {
-      var showName = knownFor[i].name;
-      console.log(showName);
-
-      var firstAirDate = knownFor[i].first_air_date;
-      console.log(firstAirDate);
-
-      var overview = knownFor[i].overview;
-      console.log(overview);
+  for (var i = 0; i < movies.length; i++) {
+    if (movies[i].media_type === "movie") {
+      var movieTitle = movies[i].original_title;
+      var movieElement = $("<div>")
+        .addClass("row")
+        .append(
+          $("<div>").addClass("col s12").html($("<h4>").text(movieTitle))
+        );
+      projectsEl.append(movieElement);
     }
   }
 }
 
 function showActorInfo(actorData) {
   var actorName = nameFormatter(actorData);
+  var actorHeight = metersToFeet(actorData);
+  var actorBday = actorData[0].birthday;
 
   console.log("----------------------");
   console.log(actorName);
-
-  var actorAge = actorData[0].age + "yrs old";
-  console.log(actorAge);
-  var actorBday = actorData[0].birthday;
+  console.log(actorHeight);
   console.log("Birthday: " + actorBday);
 
-  var actorHeight = metersToFeet(actorData);
-  console.log(actorHeight);
+  // Update actor name
+  actorNameEl.text(actorName);
+
+  // Update actor height
+  $(".card-content .height h4").text("Height: " + actorHeight);
+
+  // Update actor birthday
+  $(".card-content .birthday h4").text("Birthday: " + actorBday);
 }
 
 function nameFormatter(actorData) {
-  fixNameArray = actorData[0].name.toLowerCase(); //forces all letter to be lowercase
-  nameArray = fixNameArray.split(" "); //makes an array of the actors first, last, and/or middle name
-  var actorName = ""; //initialize string builder
-  var wordArray; //intializie array for each letter
+  if (actorData && actorData.length > 0 && actorData[0].name) {
+    var fixNameArray = actorData[0].name.toLowerCase();
+    var nameArray = fixNameArray.split(" ");
+    var actorName = "";
 
-  for (i = 0; i < nameArray.length; i++) {
-    wordArray = nameArray[i].split(""); //splits name up into individual letters
-    wordArray[0] = wordArray[0].toUpperCase(); //makes the first letter uppercase
-    actorName = actorName + wordArray.join("") + " "; //puts the full name back together
+    for (var i = 0; i < nameArray.length; i++) {
+      var wordArray = nameArray[i].split("");
+      wordArray[0] = wordArray[0].toUpperCase();
+      actorName += wordArray.join("") + " ";
+    }
+
+    return actorName.trim();
+  } else {
+    return "";
   }
-
-  return actorName;
 }
 
 function metersToFeet(actorData) {
-  var rawHeight = actorData[0].height * 3.28084;
-  var truncHeight = rawHeight - Math.trunc(rawHeight);
-  var actorHeight =
-    Math.floor(rawHeight) + "ft " + Math.ceil(truncHeight * 12) + "in";
+  if (actorData && actorData.length > 0 && actorData[0].height) {
+    var rawHeight = actorData[0].height * 3.28084;
+    var truncHeight = rawHeight - Math.trunc(rawHeight);
+    var actorHeight =
+      Math.floor(rawHeight) + "ft " + Math.ceil(truncHeight * 12) + "in";
 
-  return actorHeight;
-}
-
-buttonEl.on("click", function (event) {
-  event.preventDefault();
-  handleSubmit();
-});
-
-function handleSubmit() {
-  var actorName = inputEl.val();
-  console.log(actorName);
-  var newName = actorName.split(" ").join("%20");
-  fetchRequests(newName);
+    return actorHeight;
+  } else {
+    return "";
+  }
 }
