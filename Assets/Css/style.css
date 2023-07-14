@@ -47,6 +47,13 @@ nav ul li a {
   padding: 20px;
 }
 
+.image {
+  max-width: 200px; /* Adjust the size as desired */
+  max-height: 200px; /* Adjust the size as desired */
+  object-fit: cover;
+  object-position: center;
+}
+
 
 /* .info-cards{
   display: flex;

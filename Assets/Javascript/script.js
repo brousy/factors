@@ -2,7 +2,8 @@ var movieKey = "058146d0b6c44dd4946f65767dd0e064";
 var inputEl = $("#actInput");
 var buttonEl = $(".search-btn");
 var projectsEl = $(".scrollable-content");
-var actorNameEl = $(".card-title");
+var posterEl = $("#poster");
+var actorNameEl = $("#actorName");
 var actorImageEl = $(".card-content img");
 var heightEl = $(".card-content .col.s12:nth-child(2) h4");
 var birthdayEl = $(".card-content .col.s12:nth-child(3) h4");
@@ -63,13 +64,33 @@ function showMovieInfo(movieData) {
   for (var i = 0; i < movies.length; i++) {
     if (movies[i].media_type === "movie") {
       var movieTitle = movies[i].original_title;
+      var moviePosterPath = movies[i].poster_path;
+
       var movieElement = $("<div>")
         .addClass("row")
         .append(
           $("<div>").addClass("col s12").html($("<h4>").text(movieTitle))
         );
+
       projectsEl.append(movieElement);
       actorImageEl.attr("src", "https://image.tmdb.org/t/p/w500/" + actorImage);
+
+      var moviePosterElement = $("<div>")
+        .addClass("row")
+        .append(
+          $("<div>")
+            .addClass("col s12")
+            .html(
+              $("<img>")
+                .addClass("image")
+                .attr(
+                  "src",
+                  "https://image.tmdb.org/t/p/w500/" + moviePosterPath
+                )
+            )
+        );
+
+      projectsEl.append(moviePosterElement);
     }
   }
 }
