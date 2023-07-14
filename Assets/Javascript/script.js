@@ -56,7 +56,9 @@ function fetchRequests(newName) {
 
 function showMovieInfo(movieData) {
   var movies = movieData.results[0].known_for;
+  var actorImage = movieData.results[0].profile_path;
   projectsEl.empty();
+  console.log(actorImage);
 
   for (var i = 0; i < movies.length; i++) {
     if (movies[i].media_type === "movie") {
@@ -67,6 +69,7 @@ function showMovieInfo(movieData) {
           $("<div>").addClass("col s12").html($("<h4>").text(movieTitle))
         );
       projectsEl.append(movieElement);
+      actorImageEl.attr("src", "https://image.tmdb.org/t/p/w500/" + actorImage);
     }
   }
 }
