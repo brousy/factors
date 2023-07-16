@@ -11,9 +11,8 @@ var actorName = "";
 
 buttonEl.on("click", function (event) {
   event.preventDefault();
-  actorName = inputEl.val();
-  var newName = nameFormatter(actorName);
-  fetchRequests(newName);
+  actorName = nameFormatter(inputEl.val());
+  fetchRequests(actorName);
 });
 
 function fetchRequests(newName) {
@@ -58,8 +57,10 @@ function showMovieInfo(movieData) {
 
   for (var i = 0; i < movies.length; i++) {
     if (movies[i].media_type === "movie") {
-      var movieTitle = movies[i].original_title;
+      var movieTitle = movies[i].title;
       var moviePosterPath = movies[i].poster_path;
+      var releaseDate = movies[i].release_date;
+      var overview = movies[i].overview;
 
       var movieElement = $("<div>")
         .addClass("row")
@@ -87,26 +88,28 @@ function showMovieInfo(movieData) {
 
       projectsEl.append(moviePosterElement);
     } // we need an else function to handle if the media type is "tv"
+
+    else {
+      var movieTitle = movies[i].name;
+      var moviePosterPath = movies[i].poster_path;
+      var releaseDate = movies[i].first_air_date;
+      var overview = movies[i].overview;
+
+    }
   }
 }
 
 function showActorInfo(actorData) {
-  var actorHeight = metersToFeet(actorData);
-  var actorBday = actorData[0].birthday;
-
-  console.log("----------------------");
-  console.log(actorName);
-  console.log(actorHeight);
-  console.log("Birthday: " + actorBday);
-
+  //maybe display if theyre still alive? we have that info in the API.
+  // could possibly use a wiki API to display a summary of their life too. this is not required, just feeling like the actor card is bare.
   // Update actor name
   actorNameEl.text(actorName);
 
   // Update actor height
-  $(".card-content .height h4").text("Height: " + actorHeight);
+  $(".card-content .height h4").text("Height: " + metersToFeet(actorData));
 
   // Update actor birthday
-  $(".card-content .birthday h4").text("Birthday: " + actorBday);
+  $(".card-content .birthday h4").text("Birthday: " + actorData[0].birthday);
 }
 
 function nameFormatter(actorName) {
@@ -124,8 +127,17 @@ function nameFormatter(actorName) {
 function metersToFeet(actorData) {
   var rawHeight = actorData[0].height * 3.28084;
   var truncHeight = rawHeight - Math.trunc(rawHeight);
-  var actorHeight =
-    Math.floor(rawHeight) + "ft " + Math.ceil(truncHeight * 12) + "in";
+
+  //test for if they are exactly x feet tall (before i added this it said Danny Devito was 4' 12" instead of 5 ft)
+  if (Math.ceil(truncHeight * 12) === 12) {
+    var actorHeight = Math.ceil(rawHeight) + "ft";
+  }
+
+  //otherwise shows feet and inches.
+  else {
+    var actorHeight =
+      Math.floor(rawHeight) + "ft " + Math.ceil(truncHeight * 12) + "in";
+  }
 
   return actorHeight;
 }
