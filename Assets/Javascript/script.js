@@ -139,5 +139,10 @@ function metersToFeet(actorData) {
       Math.floor(rawHeight) + "ft " + Math.ceil(truncHeight * 12) + "in";
   }
 
-  return actorHeight;
+  return actorHeight;}
+function handleSubmit() {
+    var actorName = inputEl.val();
+    console.log(actorName);
+    var newName = actorName.split(" ").join("%20");
+    fetchRequests(newName);
 }
