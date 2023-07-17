@@ -7,6 +7,7 @@ var actorNameEl = $("#actorName");
 var actorImageEl = $(".card-content img");
 var heightEl = $(".card-content .col.s12:nth-child(2) h4");
 var birthdayEl = $(".card-content .col.s12:nth-child(3) h4");
+var cardEl = $(".info-cards");
 var actorName = "";
 
 buttonEl.on("click", function (event) {
@@ -50,6 +51,7 @@ function fetchRequests(newName) {
 }
 
 function showMovieInfo(movieData) {
+  cardEl.removeClass("hidden");
   var movies = movieData.results[0].known_for;
   var actorImage = movieData.results[0].profile_path;
   projectsEl.empty();
