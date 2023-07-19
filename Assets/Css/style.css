@@ -1,18 +1,29 @@
+:root{
+  --dark-bg: #333;
+  --light-gray: #C0C0C4;
+}
+
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
   background-color: #333;
-  background-image: url(/Assets/Images/movie.jpeg);
+  background-image: url(../Images/movie.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0px;
   padding: 0px;
-  
+}
+
+html, 
+body{
+  height: 100%;
+}
+
+body>footer {
+  position: sticky;
+  top: 100vh;
 }
 
 header {
-
   color: #fff;
   padding: 20px;
 }
@@ -25,6 +36,12 @@ nav ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+#actInput {
+  background-color: #fff !important;
+  font-size: 22px !important;
+  font-weight: 600;
 }
 
 nav ul li {
@@ -58,14 +75,29 @@ nav ul li a {
   height: 450px;
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Hide horizontal scrolling */
+  scrollbar-width: auto;
+  scrollbar-color: var(--light-gray);
 }
 
-.page-footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 200px;
+.scrollable-content::-webkit-scrollbar {
+  width: 8px;
 }
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background-color: var(--light-gray);
+  border-radius: 10px;
+}
+
+.card{
+  background-color: var(--dark-bg)!important;
+}
+
+.card-border{
+  display: flex;
+  align-items: center;
+  border-bottom: #C0C0C4 solid 1px;
+}
+
 
 h1 {
   text-align: center;
@@ -78,9 +110,22 @@ h2 {
 
 h3 {
   font-size: 30px;
-
+  position: relative;
+  top: -25px;
   text-align: center;
 }
+
+h6 {
+  position: relative;
+  top: -20px;
+  text-align: center;
+}
+
+.overview{
+  position: relative;
+  top: -10px;
+}
+
 
 span {
   font-size: 12px;

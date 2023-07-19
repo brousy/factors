@@ -1,4 +1,5 @@
 var movieKey = "058146d0b6c44dd4946f65767dd0e064";
+
 var inputEl = $("#actInput");
 var buttonEl = $(".search-btn");
 var projectsEl = $(".scrollable-content");
@@ -8,12 +9,36 @@ var actorImageEl = $(".card-content img");
 var heightEl = $(".card-content .col.s12:nth-child(2) h4");
 var birthdayEl = $(".card-content .col.s12:nth-child(3) h4");
 var cardEl = $(".info-cards");
+
 var actorName = "";
 
 buttonEl.on("click", function (event) {
   event.preventDefault();
   actorName = nameFormatter(inputEl.val());
   fetchRequests(actorName);
+
+  let searchHistoryArr = JSON.parse(localStorage.getItem("history")) || [];
+  $(".name-list").empty();
+
+  if (!searchHistoryArr.includes(actorName)) {
+    searchHistoryArr.push(actorName);
+    localStorage.setItem("history", JSON.stringify(searchHistoryArr));
+    $(".name-list").innerHTML = "";
+  }
+
+  for (let i = 0; i < searchHistoryArr.length; i++) {
+    let btn = $("<button>");
+    btn.attr("class", "history-btn");
+    btn.text(searchHistoryArr[i]);
+
+    btn.on("click", function (event) {
+      fetchRequests($(this).text());
+      actorNameEl.text($(this).text());
+    });
+
+    $(".name-list").append(btn);
+  }
+
 });
 
 function fetchRequests(newName) {
@@ -56,7 +81,7 @@ function showMovieInfo(movieData) {
   var actorImage = movieData.results[0].profile_path;
   projectsEl.empty();
   console.log(actorImage);
-
+  // var parentEl = $('.dataParent');
   for (var i = 0; i < movies.length; i++) {
     if (movies[i].media_type === "movie") {
       var movieTitle = movies[i].title;
@@ -64,48 +89,66 @@ function showMovieInfo(movieData) {
       var releaseDate = movies[i].release_date;
       var overview = movies[i].overview;
 
-      var movieElement = $("<div>")
-        .addClass("row")
+      var movieElement = $("<div>").addClass("row card-border")
         .append(
-          $("<div>").addClass("col s12").html($("<h4>").text(movieTitle))
-        );
-
-      projectsEl.append(movieElement);
-      actorImageEl.attr("src", "https://image.tmdb.org/t/p/w500/" + actorImage);
-
-      var moviePosterElement = $("<div>")
-        .addClass("row")
+          $("<div>").addClass("col s3")
+            .append(
+              $("<img>").addClass("image")
+                .attr("src", "https://image.tmdb.org/t/p/w500/" + moviePosterPath)
+            )
+        )
         .append(
-          $("<div>")
-            .addClass("col s12")
-            .html(
-              $("<img>")
-                .addClass("image")
-                .attr(
-                  "src",
-                  "https://image.tmdb.org/t/p/w500/" + moviePosterPath
-                )
+          $("<div>").addClass("col s9")
+            .append(
+              $("<h3>").text(movieTitle),
+              $("<h6>").text(releaseDate),
+              $("<p>").text(overview).addClass("overview")
             )
         );
 
-      projectsEl.append(moviePosterElement);
-    } // we need an else function to handle if the media type is "tv"
+      actorImageEl.attr("src", "https://image.tmdb.org/t/p/w500/" + actorImage);
 
-    else {
+      projectsEl.append(movieElement);
+
+    }
+
+    else { //handles if a tv show comes up
       var movieTitle = movies[i].name;
       var moviePosterPath = movies[i].poster_path;
       var releaseDate = movies[i].first_air_date;
       var overview = movies[i].overview;
+
+      var movieElement = $("<div>").addClass("row")
+        .append(
+          $("<div>").addClass("col s3")
+            .append(
+              $("<img>").addClass("image")
+                .attr("src", "https://image.tmdb.org/t/p/w500/" + moviePosterPath)
+            )
+        )
+        .append(
+          $("<div>").addClass("col s9")
+            .append(
+              $("<h3>").text(movieTitle),
+              $("<p>").text(overview),
+              $("<h6>").text(releaseDate)
+            )
+        );
+
+      actorImageEl.attr("src", "https://image.tmdb.org/t/p/w500/" + actorImage);
+
+      projectsEl.append(movieElement);
 
     }
   }
 }
 
 function showActorInfo(actorData) {
+  console.log(actorData);
   //maybe display if theyre still alive? we have that info in the API.
   // could possibly use a wiki API to display a summary of their life too. this is not required, just feeling like the actor card is bare.
   // Update actor name
-  actorNameEl.text(actorName);
+  actorNameEl.text(nameFormatter(actorData[0].name));
 
   // Update actor height
   $(".card-content .height h4").text("Height: " + metersToFeet(actorData));
