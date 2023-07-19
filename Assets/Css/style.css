@@ -1,192 +1,126 @@
-:root {
+:root{
   --dark-bg: #333;
   --light-gray: #C0C0C4;
 }
-
 body {
   font-family: Arial, sans-serif;
   background-color: #333;
   background-image: url(../Images/movie.jpeg);
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y; 
   margin: 0px;
   padding: 0px;
-}
-
+}                           
 html,
-body {
+body{
   height: 100%;
 }
-
 body>footer {
   position: sticky;
   top: 100vh;
 }
-
 header {
   color: #fff;
   padding: 20px;
 }
-
-ul {
-  text-align: center;
-}
-
+/*  */
 nav ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-
 #actInput {
+  display: flex;
   background-color: #fff !important;
   font-size: 22px !important;
   font-weight: 600;
 }
-
-nav ul li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  padding: 5px 10px;
-}
-
-#info {
-  min-height: 800px;
-}
-
-#search {
-  padding: 20px;
-}
-
 .image {
   max-width: 200px;
-  /* Adjust the size as desired */
   max-height: 200px;
-  /* Adjust the size as desired */
   object-fit: cover;
   object-position: center;
 }
-
-
 .scrollable-content {
   height: 450px;
   overflow-y: auto;
-  /* Enable vertical scrolling */
   overflow-x: hidden;
-  /* Hide horizontal scrolling */
   scrollbar-width: auto;
   scrollbar-color: var(--light-gray);
 }
-
 .scrollable-content::-webkit-scrollbar {
   width: 8px;
 }
-
 .scrollable-content::-webkit-scrollbar-thumb {
   background-color: var(--light-gray);
   border-radius: 10px;
 }
-
-.card {
-  background-color: var(--dark-bg) !important;
-}
-
-.card-border {
-  display: flex;
-  align-items: center;
-  border-bottom: #C0C0C4 solid 1px;
-}
-
-h1 {
-  text-align: center;
-}
-
-h2 {
-  font-size: 20px;
-  font-weight: 400;
-}
-
-h3 {
-  font-size: 30px;
-  position: relative;
-  top: -25px;
-  text-align: center;
-}
-
-h6 {
-  position: relative;
-  top: -20px;
-  text-align: center;
-}
-
-.overview {
-  position: relative;
-  top: -10px;
-}
-
-
-span {
-  font-size: 12px;
-}
-
-footer {
-  color: white;
-  padding: 20px;
-}
-
-.hidden {
-  display: none;
-}
-
 button {
-  /* Variables */
   --button_radius: 0.75em;
-  --button_color: #e8e8e8;
-  --button_outline_color: #000000;
+  --button_color: #E8E8E8;
+  --button_outline_color: #FEFCFC;
   font-size: 17px;
   font-weight: bold;
   border: none;
   border-radius: var(--button_radius);
   background: var(--button_outline_color);
 }
-
-.button_top {
-  display: inline;
+.button_top{
+  display: block;
   box-sizing: border-box;
   border: 2px solid var(--button_outline_color);
   border-radius: var(--button_radius);
-  padding: 3px 5px;
+  padding: 0.75em 1.5em;
   background: var(--button_color);
   color: var(--button_outline_color);
   transform: translateY(-0.2em);
   transition: transform 0.1s ease;
 }
-
 button:hover .button_top {
-  /* Pull the button upwards when hovered */
   transform: translateY(-0.33em);
 }
-
 button:active .button_top {
-  /* Push the button downwards when pressed */
   transform: translateY(-0.33em);
 }
-
-
-.button-54 {
+.card{
+  background-color: var(--dark-bg)!important;
+}
+h1 {
+  text-align: center;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 400;
+}
+h3 {
+  font-size: 30px;
+  position: relative;
+  top: -25px;
+  text-align: center;
+}
+h6 {
+  position: relative;
+  top: -20px;
+  text-align: center;
+}
+.overview{
+  position: relative;
+  top: -10px;
+}
+span {
+  font-size: 12px;
+}
+.hidden{
+  display: none;
+}
+.search-btn {
   display: flex;
   font-family: "Open Sans", sans-serif;
-  font-size: 25px;
+  font-size: 16px;
   height: 60px;
   letter-spacing: 2px;
   text-decoration: none;
   text-transform: uppercase;
-  text-align: center;
   color: #FFFFFF;
   cursor: pointer;
   border: 3px solid;
@@ -197,13 +131,15 @@ button:active .button_top {
   -webkit-user-select: none;
   touch-action: manipulation;
 }
-
-.button-54:active {
+.search-btn:active {
   box-shadow: 0px 0px 0px 0px;
   top: 5px;
   left: 5px;
 }
-
+footer {
+  padding: 20px;
+  color: beige;
+}
 @media (min-width: 768px) {
   .button-54 {
     padding: 0.25em 0.75em;
