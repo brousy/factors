@@ -1,4 +1,4 @@
-:root{
+:root {
   --dark-bg: #333;
   --light-gray: #C0C0C4;
 }
@@ -13,8 +13,8 @@ body {
   padding: 0px;
 }
 
-html, 
-body{
+html,
+body {
   height: 100%;
 }
 
@@ -64,8 +64,10 @@ nav ul li a {
 }
 
 .image {
-  max-width: 200px; /* Adjust the size as desired */
-  max-height: 200px; /* Adjust the size as desired */
+  max-width: 200px;
+  /* Adjust the size as desired */
+  max-height: 200px;
+  /* Adjust the size as desired */
   object-fit: cover;
   object-position: center;
 }
@@ -73,8 +75,10 @@ nav ul li a {
 
 .scrollable-content {
   height: 450px;
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrolling */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  overflow-x: hidden;
+  /* Hide horizontal scrolling */
   scrollbar-width: auto;
   scrollbar-color: var(--light-gray);
 }
@@ -88,16 +92,15 @@ nav ul li a {
   border-radius: 10px;
 }
 
-.card{
-  background-color: var(--dark-bg)!important;
+.card {
+  background-color: var(--dark-bg) !important;
 }
 
-.card-border{
+.card-border {
   display: flex;
   align-items: center;
   border-bottom: #C0C0C4 solid 1px;
 }
-
 
 h1 {
   text-align: center;
@@ -121,7 +124,7 @@ h6 {
   text-align: center;
 }
 
-.overview{
+.overview {
   position: relative;
   top: -10px;
 }
@@ -136,17 +139,55 @@ footer {
   padding: 20px;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
+button {
+  /* Variables */
+  --button_radius: 0.75em;
+  --button_color: #e8e8e8;
+  --button_outline_color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--button_radius);
+  background: var(--button_outline_color);
+}
+
+.button_top {
+  display: inline;
+  box-sizing: border-box;
+  border: 2px solid var(--button_outline_color);
+  border-radius: var(--button_radius);
+  padding: 3px 5px;
+  background: var(--button_color);
+  color: var(--button_outline_color);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}
+
+button:hover .button_top {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
+}
+
+button:active .button_top {
+  /* Push the button downwards when pressed */
+  transform: translateY(-0.33em);
+}
+
+
 .button-54 {
+  display: flex;
   font-family: "Open Sans", sans-serif;
-  font-size: 16px;
+  font-size: 25px;
+  height: 60px;
   letter-spacing: 2px;
   text-decoration: none;
   text-transform: uppercase;
-  color: #000;
+  text-align: center;
+  color: #FFFFFF;
   cursor: pointer;
   border: 3px solid;
   padding: 0.25em 0.5em;
