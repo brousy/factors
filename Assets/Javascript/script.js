@@ -12,6 +12,13 @@ var cardEl = $(".info-cards");
 
 var actorName = "";
 
+$("#inputEl").on("keypress", function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    $("#buttonEl").trigger("click");
+  }
+});
+
 buttonEl.on("click", function (event) {
   event.preventDefault();
   actorName = nameFormatter(inputEl.val());
