@@ -28,7 +28,7 @@ buttonEl.on("click", function (event) {
 
   for (let i = 0; i < searchHistoryArr.length; i++) {
     let btn = $("<button>");
-    btn.attr("class", "history-btn");
+    btn.attr("class", "button_top");
     btn.text(searchHistoryArr[i]);
 
     btn.on("click", function (event) {
@@ -38,7 +38,6 @@ buttonEl.on("click", function (event) {
 
     $(".name-list").append(btn);
   }
-
 });
 
 function fetchRequests(newName) {
@@ -158,6 +157,7 @@ function showActorInfo(actorData) {
 }
 
 function nameFormatter(actorName) {
+  actorName = actorName.toLowerCase();
   var nameArray = actorName.split(" ");
   actorName = "";
   for (var i = 0; i < nameArray.length; i++) {
