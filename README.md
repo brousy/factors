@@ -40,7 +40,8 @@ If you used any third-party assets that require attribution, list the creators w
 If you followed tutorials, include links to those here as well.
 
 ## Screen Shots
-![./]
+![screenshot](./Assets/Images/Screenshot%202023-07-19%20at%209.16.35%20PM.png)
+![screenshot1](./Assets/Images/Screenshot%202023-07-19%20at%209.16.45%20PM.png)
 
 ## Live link to application
-[https:]
+[https://brousy.github.io/factors/]
