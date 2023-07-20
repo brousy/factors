@@ -12,13 +12,14 @@ var cardEl = $(".info-cards");
 
 var actorName = "";
 
-$("#inputEl").on("keypress", function (event) {
+localStorage.clear();
+
+inputEl.on("keypress", function (event) {
   if (event.keyCode === 13) {
     event.preventDefault();
-    $("#buttonEl").trigger("click");
+    buttonEl.trigger("click");
   }
 });
-
 buttonEl.on("click", function (event) {
   event.preventDefault();
   actorName = nameFormatter(inputEl.val());
@@ -48,7 +49,11 @@ buttonEl.on("click", function (event) {
 });
 
 function fetchRequests(newName) {
-  var tmdbURL = "https://api.themoviedb.org/3/search/person?query=" + newName + "&api_key=" + movieKey; //the movie database API URL
+  var tmdbURL =
+    "https://api.themoviedb.org/3/search/person?query=" +
+    newName +
+    "&api_key=" +
+    movieKey; //the movie database API URL
 
   var celebURL = "https://api.api-ninjas.com/v1/celebrity?name=" + newName; //the celebrity API URL
 
@@ -95,16 +100,23 @@ function showMovieInfo(movieData) {
       var releaseDate = movies[i].release_date;
       var overview = movies[i].overview;
 
-      var movieElement = $("<div>").addClass("row card-border")
+      var movieElement = $("<div>")
+        .addClass("row card-border")
         .append(
-          $("<div>").addClass("col s3")
+          $("<div>")
+            .addClass("col s3")
             .append(
-              $("<img>").addClass("image")
-                .attr("src", "https://image.tmdb.org/t/p/w500/" + moviePosterPath)
+              $("<img>")
+                .addClass("image")
+                .attr(
+                  "src",
+                  "https://image.tmdb.org/t/p/w500/" + moviePosterPath
+                )
             )
         )
         .append(
-          $("<div>").addClass("col s9")
+          $("<div>")
+            .addClass("col s9")
             .append(
               $("<h3>").text(movieTitle),
               $("<h6>").text(releaseDate),
@@ -115,25 +127,30 @@ function showMovieInfo(movieData) {
       actorImageEl.attr("src", "https://image.tmdb.org/t/p/w500/" + actorImage);
 
       projectsEl.append(movieElement);
-
-    }
-
-    else { //handles if a tv show comes up
+    } else {
+      //handles if a tv show comes up
       var movieTitle = movies[i].name;
       var moviePosterPath = movies[i].poster_path;
       var releaseDate = movies[i].first_air_date;
       var overview = movies[i].overview;
 
-      var movieElement = $("<div>").addClass("row")
+      var movieElement = $("<div>")
+        .addClass("row")
         .append(
-          $("<div>").addClass("col s3")
+          $("<div>")
+            .addClass("col s3")
             .append(
-              $("<img>").addClass("image")
-                .attr("src", "https://image.tmdb.org/t/p/w500/" + moviePosterPath)
+              $("<img>")
+                .addClass("image")
+                .attr(
+                  "src",
+                  "https://image.tmdb.org/t/p/w500/" + moviePosterPath
+                )
             )
         )
         .append(
-          $("<div>").addClass("col s9")
+          $("<div>")
+            .addClass("col s9")
             .append(
               $("<h3>").text(movieTitle),
               $("<p>").text(overview),
@@ -144,7 +161,6 @@ function showMovieInfo(movieData) {
       actorImageEl.attr("src", "https://image.tmdb.org/t/p/w500/" + actorImage);
 
       projectsEl.append(movieElement);
-
     }
   }
 }
